@@ -17,6 +17,6 @@ status: published
 
 Bạn muốn người xem cảm nhận điều gì? Khi đã có câu trả lời, việc giảm bớt một vài màu cạnh tranh sẽ dễ dàng hơn rất nhiều.
 
-![Bảng màu tối giản]({static}/images/blog/quiet-frame.svg)
+![Bảng màu tối giản](/images/blog/quiet-frame.svg)
 
 Màu sắc tốt không gây chú ý vì chính nó; nó dẫn cảm xúc của người xem đến câu chuyện của bức ảnh.

@@ -19,10 +19,10 @@
     <p class="eyebrow">{{ article.category }}</p>
     <h1>{{ article.title }}</h1>
     <p class="article-meta">{{ article.date|strftime('%d/%m/%Y') }} · {{ article.author }}</p>
-    <img class="article-cover" src="{{ SITEURL }}/{{ article.cover }}" alt="{{ article.cover_alt|default(article.title) }}" width="1280" height="720" fetchpriority="high">
+    <img class="article-cover" src="{{ SITEURL }}/{{ article.cover.lstrip('/') }}" alt="{{ article.cover_alt|default(article.title) }}" width="1280" height="720" fetchpriority="high">
   </header>
   <div class="article-content">
-    {{ article.content }}
+    {{ article.content | with_site_url }}
   </div>
   {% if article.tags %}
   <footer class="article-tags"><span>Thẻ:</span>{% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}</footer>

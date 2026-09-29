@@ -1,6 +1,9 @@
 from pathlib import Path
+import re
 
 import yaml
+from jinja2 import pass_context
+from markupsafe import Markup
 
 PROJECT_ROOT = Path(__file__).parent
 with (PROJECT_ROOT / "data" / "site.yml").open(encoding="utf-8") as site_file:
@@ -13,6 +16,27 @@ SITESUBTITLE = SITE["tagline"]
 SITE_DESCRIPTION = SITE["description"]
 SITE_BACKGROUND = SITE["background_image"]
 SITE_COPYRIGHT = SITE["copyright"]
+
+
+@pass_context
+def with_site_url(context, html: str) -> Markup:
+    """Make CMS root-relative media paths work on GitHub project pages.
+
+    Pages CMS writes inserted images as /images/..., while a GitHub project
+    page is served below a repository path such as /learn-cine/. The filter
+    injects SITEURL during production builds and leaves local preview paths
+    untouched.
+    """
+
+    site_url = str(context.get("SITEURL", "")).rstrip("/")
+    if not site_url:
+        return Markup(html)
+    rewritten = re.sub(
+        r'(?P<attribute>\b(?:src|href)=["\'])/images/',
+        rf'\g<attribute>{site_url}/images/',
+        str(html),
+    )
+    return Markup(rewritten)
 
 PATH = "content"
 TIMEZONE = "Asia/Ho_Chi_Minh"
@@ -50,6 +74,7 @@ MARKDOWN = {
 }
 
 PLUGINS = ["yaml_metadata"]
+JINJA_FILTERS = {"with_site_url": with_site_url}
 DIRECT_TEMPLATES = ["index", "categories", "tags", "archives"]
 PAGINATED_TEMPLATES = {"index": None}
 
