@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+pytest-cache-files-*/
+
+# Local environments and generated site output
+.venv/
+output/
+output-production/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/

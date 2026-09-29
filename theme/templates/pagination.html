@@ -1,0 +1,23 @@
+{% if articles_paginator is defined and articles_paginator.num_pages > 1 %}
+<nav class="pagination" aria-label="Phân trang bài viết">
+  {% if articles_page.has_previous() %}
+  <a class="pagination__previous" href="{{ SITEURL }}/{{ articles_previous_page.url }}">← <span>Trang trước</span></a>
+  {% endif %}
+  <ol class="pagination__pages">
+    {% for page_number in articles_paginator.page_range %}
+      {% set show_page = articles_paginator.num_pages <= 7 or page_number <= 2 or page_number > articles_paginator.num_pages - 2 or (page_number >= articles_page.number - 1 and page_number <= articles_page.number + 1) %}
+      {% if show_page %}
+        {% set numbered_page = articles_paginator.page(page_number) %}
+        <li>{% if page_number == articles_page.number %}<span aria-current="page" aria-label="Trang {{ page_number }}, trang hiện tại">{{ page_number }}</span>{% else %}<a href="{{ SITEURL }}/{{ numbered_page.url }}" aria-label="Đến trang {{ page_number }}">{{ page_number }}</a>{% endif %}</li>
+      {% elif page_number == 3 and articles_page.number > 4 %}
+        <li aria-hidden="true"><span>…</span></li>
+      {% elif page_number == articles_paginator.num_pages - 2 and articles_page.number < articles_paginator.num_pages - 3 %}
+        <li aria-hidden="true"><span>…</span></li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+  {% if articles_page.has_next() %}
+  <a class="pagination__next" href="{{ SITEURL }}/{{ articles_next_page.url }}"><span>Trang sau</span> →</a>
+  {% endif %}
+</nav>
+{% endif %}

@@ -1,0 +1,13 @@
+schema_version: 1
+single_admin: true
+admin:
+  github_username: FayeV77
+  display_name: Learn Cine Administrator
+  role: admin
+  active: true
+  permissions:
+    - create_post
+    - edit_post
+    - delete_post
+    - publish_post
+    - manage_media

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.seo_title|default(article.title) }} | {{ SITENAME }}{% endblock %}
+{% block meta_description %}{{ article.seo_description|default(article.summary) }}{% endblock %}
+{% block canonical_path %}{{ article.url }}{% endblock %}
+{% block og_title %}{{ article.seo_title|default(article.title) }}{% endblock %}
+{% block og_description %}{{ article.seo_description|default(article.summary) }}{% endblock %}
+{% block social_meta %}
+{{ super() }}
+<meta property="og:type" content="article">
+<meta property="og:image" content="{{ SITEURL }}/{{ article.cover }}">
+<meta property="article:published_time" content="{{ article.date.isoformat() }}">
+{% endblock %}
+
+{% block content %}
+<article class="article-page site-shell">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{{ SITEURL }}/">Bài viết</a><span>/</span><span aria-current="page">{{ article.title }}</span></nav>
+  <header class="article-header">
+    <p class="eyebrow">{{ article.category }}</p>
+    <h1>{{ article.title }}</h1>
+    <p class="article-meta">{{ article.date|strftime('%d/%m/%Y') }} · {{ article.author }}</p>
+    <img class="article-cover" src="{{ SITEURL }}/{{ article.cover }}" alt="{{ article.cover_alt|default(article.title) }}" width="1280" height="720" fetchpriority="high">
+  </header>
+  <div class="article-content">
+    {{ article.content }}
+  </div>
+  {% if article.tags %}
+  <footer class="article-tags"><span>Thẻ:</span>{% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}</footer>
+  {% endif %}
+  <nav class="article-neighbors" aria-label="Điều hướng bài viết">
+    {% if article.prev_article %}<a href="{{ SITEURL }}/{{ article.prev_article.url }}">← {{ article.prev_article.title }}</a>{% endif %}
+    {% if article.next_article %}<a href="{{ SITEURL }}/{{ article.next_article.url }}">{{ article.next_article.title }} →</a>{% endif %}
+  </nav>
+</article>
+{% endblock %}

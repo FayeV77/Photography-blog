@@ -1,0 +1,2 @@
+{% extends "base.html" %}
+{% block content %}<section class="hero site-shell compact-hero"><p class="eyebrow">Khám phá</p><h1>Chuyên mục</h1></section><section class="site-shell taxonomy-list"><ul>{% for category, articles in categories %}<li><a href="{{ SITEURL }}/{{ category.url }}">{{ category }} <span>{{ articles|count }}</span></a></li>{% endfor %}</ul></section>{% endblock %}

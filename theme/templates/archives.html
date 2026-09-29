@@ -1,0 +1,2 @@
+{% extends "base.html" %}
+{% block content %}<section class="hero site-shell compact-hero"><p class="eyebrow">Lưu trữ</p><h1>Tất cả bài viết</h1></section><section class="site-shell archive-list"><ul>{% for article in dates %}<li><time datetime="{{ article.date.isoformat() }}">{{ article.date|strftime('%d/%m/%Y') }}</time><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>{% endfor %}</ul></section>{% endblock %}

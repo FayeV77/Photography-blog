@@ -1,0 +1,8 @@
+<article class="article-card">
+  <a class="article-card__image-link" href="{{ SITEURL }}/{{ article.url }}" aria-label="Đọc bài: {{ article.title }}">
+    <img src="{{ SITEURL }}/{{ article.cover }}" alt="{{ article.cover_alt|default(article.title) }}" width="800" height="450" loading="lazy">
+  </a>
+  <div class="article-card__body">
+    <a class="article-card__title" href="{{ SITEURL }}/{{ article.url }}"><h2>{{ article.title }}</h2></a>
+  </div>
+</article>

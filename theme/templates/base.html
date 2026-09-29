@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{% block meta_description %}{{ SITE_DESCRIPTION }}{% endblock %}">
+  <meta name="theme-color" content="#0c0c0c">
+  {% if SITEURL %}<link rel="canonical" href="{{ SITEURL }}/{% block canonical_path %}{% endblock %}">{% endif %}
+  <link rel="icon" href="{{ SITEURL }}/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/tokens.css">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/base.css">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/layout.css">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/components.css">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/article.css">
+  <title>{% block title %}{{ SITENAME }} — {{ SITESUBTITLE }}{% endblock %}</title>
+  {% block social_meta %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ SITENAME }}">
+  <meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ SITE_DESCRIPTION }}{% endblock %}">
+  {% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+  <div class="page-backdrop" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="site-shell header-inner">
+      <a class="brand" href="{{ SITEURL }}/" aria-label="{{ SITENAME }} - Trang chủ">
+        <span class="brand-mark" aria-hidden="true">LC</span>
+        <span class="brand-name">{{ SITENAME }}</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span class="visually-hidden">Mở menu</span>
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Điều hướng chính">
+        <ul>
+          {% for title, link in MENUITEMS %}
+          <li><a href="{{ SITEURL }}{{ link }}">{{ title }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="site-shell footer-inner">
+      <p>{{ SITE_COPYRIGHT }}</p>
+      <a href="{{ SITEURL }}/feeds/all.atom.xml">RSS</a>
+    </div>
+  </footer>
+  <script src="{{ SITEURL }}/theme/js/main.js" defer></script>
+</body>
+</html>

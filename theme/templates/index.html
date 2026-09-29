@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero site-shell">
+  <p class="eyebrow">{{ SITENAME }}</p>
+  <h1>Learn Cine Blog</h1>
+  <p>{{ SITESUBTITLE }}</p>
+</section>
+<section class="site-shell listing" aria-label="Danh sách bài viết">
+  <div class="article-grid">
+    {% set page_articles = articles_page.object_list if articles_page is defined else articles %}
+    {% for article in page_articles %}
+      {% include "article-card.html" %}
+    {% endfor %}
+  </div>
+  {% include "pagination.html" %}
+</section>
+{% endblock %}
